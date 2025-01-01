@@ -20,23 +20,22 @@ const generateAccessAndRefreshTokens = async (userId) => {
     }
 }
 
-
 const registerUser = asyncHandler(async (req, res) => {
     const { username, email, password, confirmPassword } = req.body;
 
     if ([username, email, password,confirmPassword].some((field) => field?.trim() === "")) {
-        throw new ApiError(400, "All fields are required");
+        return res.status(400).json({ error: "All fields are required" });
     }
      
     if (password !== confirmPassword) {
-        throw new ApiError(400, "Passwords do not match")
+        return res.status(400).json({ error: "Password doenot match" });
     }
 
     const exitedUser = await User.findOne({
         $or: [{ username }, { email }]
     })
     if (exitedUser) {
-        throw new ApiError(400, "User already exits");
+        return res.status(400).json({ error: "user already exists" });
     }
    
     const newUser = await User.create({
@@ -62,7 +61,7 @@ const loginUser = asyncHandler(async (req, res) => {
     const {email, password}= req.body;
 
     if (!email) {
-        throw new ApiError(400, "email is required");
+        return res.status(400).json({ error: "Email is required" });
     }
 
     const user = await User.findOne({
@@ -70,13 +69,13 @@ const loginUser = asyncHandler(async (req, res) => {
     })
 
     if (!user) {
-        throw new ApiError(400, "User is not registered")
+        return res.status(400).json({ error: "user is not registered" });
     }
 
     const isPasswordValid = await user.isPasswordCorrect(password);  
 
     if (!isPasswordValid) {
-        throw new ApiError(401, "Invalid user credentials");
+        return res.status(400).json({ error: "Invalid user credentials" });
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)

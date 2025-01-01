@@ -51,7 +51,11 @@ const Login = ({setLogin}) => {
             })
             .catch((error)=>{
                 console.log(error);
-                alert("Error logging in")
+                if (err.response) {
+                    alert(err.response.data.error || "Something went wrong");
+                } else {
+                    alert("Network error. Please try again.");
+                }
             })
             setFormData({
                 username:"",

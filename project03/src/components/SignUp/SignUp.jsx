@@ -4,7 +4,7 @@ import '../styles/auth.css';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-const url = "http://localhost:8000"; 
+const url = "http://localhost:8000";
 
 const SignUp = () => {
     const [formData, setFormData] = useState({
@@ -59,15 +59,19 @@ const SignUp = () => {
                 })
                 .catch(err => {
                     console.log(err);
-                    alert('An error occurred');
+                    if (err.response) {
+                        alert(err.response.data.error || "Something went wrong");
+                    } else {
+                        alert("Network error. Please try again.");
+                    }
                 });
-                setFormData({
-                    username: '',
-                    email: '',
-                    password: '',
-                    confirmPassword: ''
-                })
-                setErrors({});
+            setFormData({
+                username: '',
+                email: '',
+                password: '',
+                confirmPassword: ''
+            })
+            setErrors({});
         }
     };
     return (
@@ -138,4 +142,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
- 
