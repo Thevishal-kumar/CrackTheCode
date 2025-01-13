@@ -4,7 +4,7 @@ import '../styles/auth.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; 
 
-const url = 'http://localhost:8000'
+const url = 'https://crackthecode-rpsi.onrender.com'
 const Login = ({setLogin}) => {
     const [formData, setFormData] = useState({
         email: '',
