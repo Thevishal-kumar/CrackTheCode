@@ -51,7 +51,7 @@ const Login = ({setLogin}) => {
             })
             .catch((error)=>{
                 console.log(error);
-                if (err.response) {
+                if (error.response) {
                     alert(err.response.data.error || "Something went wrong");
                 } else {
                     alert("Network error. Please try again.");
