@@ -1,3 +1,7 @@
+LIVE LINK : 
+https://crackcompetitivecode.netlify.app/
+
+
 # CodeCracker - Competitive Programming Tracker
 
 **CodeCracker** is a web application designed to help competitive programmers track and visualize their performance across various online coding platforms such as Codeforces, LeetCode, and CodeChef. It fetches real-time user stats and displays detailed insights into progress, problem-solving stats, ratings, and streaks.
@@ -19,9 +23,6 @@ SCREENSHOTS:
 - **Backend:** Node.js Express.js MongoDB
 - **API Integration:** Codeforces, LeetCode, CodeChef APIs
 - **Visualization:** Charts and graphs for displaying stats
-
-LIVE LINK : 
-https://crackcompetitivecode.netlify.app/
 
 ## Installation & Setup:
 
