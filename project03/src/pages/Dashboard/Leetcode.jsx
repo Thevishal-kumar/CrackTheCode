@@ -95,20 +95,25 @@ const Leetcode = () => {
             setUserData(null);
             return;
         }
-        fetchUserData(username).then(data => {
-            setUserData(data);
-        });
+        fetchUserData(username);
     }, [username]);
 
     const fetchUserData = async (e) => {
-        e.preventDefault();
+        if (e && typeof e.preventDefault === 'function') {
+            e.preventDefault();
+        }
+        
+        const activeUsername = typeof e === 'string' ? e : username;
+        if (!activeUsername.trim()) return;
+
         setLoading(true);
         setError(null);
 
         try {
-            const response = await axios.get(`https://leetcode-stats-api.herokuapp.com/${username}`);
+            const baseUrl = window.location.hostname === 'localhost' ? 'http://localhost:8000' : 'https://crackthecode-rpsi.onrender.com';
+            const response = await axios.get(`${baseUrl}/api/v1/users/leetcode/${activeUsername}`);
             if (response.data) {
-                console.log("leetcode" + response)
+                console.log("leetcode", response.data);
                 setUserData(response.data);
                 const mockHistory = Array.from({ length: 12 }, (_, i) => ({
                     month: new Date(2024, i).toLocaleString('default', { month: 'short' }),
