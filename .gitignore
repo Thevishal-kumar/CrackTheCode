@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+
+# Environment variables
+.env
+backend/.env
+project03/.env
+
+# Build outputs
+project03/dist/
+project03/dist-ssr/
+
+# IDE/OS files
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
