@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/auth.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const url = 'https://crackthecode-rpsi.onrender.com'
-const Login = ({setLogin}) => {
+const Login = ({ setLogin }) => {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
 
-    const navigate = useNavigate();                                                                                                          
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
 
@@ -41,26 +41,26 @@ const Login = ({setLogin}) => {
         e.preventDefault();
         if (validateForm()) {
             // Handle login logic here
-            await axios.post(`${url}/api/v1/users/login`,formData)
-            .then((res)=>{
-                console.log(res);
-                alert("you have successfully logged in")
-                setLogin(false);
-                navigate('/dashboard');
-               
-            })
-            .catch((error)=>{
-                console.log(error);
-                if (error.response) {
-                    alert(error.response.data.error || "Something went wrong");
-                } else {
-                    alert("Network error. Please try again.");
-                }
-            })
+            await axios.post(`${url}/api/v1/users/login`, formData)
+                .then((res) => {
+                    console.log(res);
+                    alert("you have successfully logged in")
+                    setLogin(false);
+                    navigate('/dashboard');
+
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error.response) {
+                        alert(error.response.data.error || "Something went wrong");
+                    } else {
+                        alert("Network error. Please try again.");
+                    }
+                })
             setFormData({
-                username:"",
-                email:"",
-                password:""
+                username: "",
+                email: "",
+                password: ""
             })
         }
     };
